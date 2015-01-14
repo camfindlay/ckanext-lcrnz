@@ -19,3 +19,5 @@ class NewZealandLandcarePlugin(plugins.SingletonPlugin):
         # where our templates are kept in this pluign
         toolkit.add_template_directory(config, 'templates')
 
+        # add our extension's public directory, to include the custom css file
+        toolkit.add_public_directory(config, 'public')
