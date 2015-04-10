@@ -2,3 +2,10 @@
   padding: 4px 10px;
   width: 175px;
 }
+
+.form-horizontal .help-block {
+  margin-left: 130px;
+  margin-bottom: 1em;
+  margin-top: -15px;
+  padding-top: 0;
+}
