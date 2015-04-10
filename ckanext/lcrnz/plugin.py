@@ -11,11 +11,9 @@ class NewZealandLandcarePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetFo
     plugins.implements(plugins.IValidators)
 
     def _modify_package_schema(self, schema):
-        default_validators = [toolkit.get_validator('ignore_missing'),
-                              toolkit.get_converter('convert_to_extras')]
-
         schema.update({
-            'publisher': default_validators,
+            'publisher': [toolkit.get_validator('ignore_empty'),
+                          toolkit.get_converter('convert_to_extras')],
             'publication_year': [toolkit.get_validator('ignore_empty'),
                                  toolkit.get_validator('ckanext_lcrnz_is_year'),
                                  toolkit.get_converter('convert_to_extras')],
@@ -25,7 +23,8 @@ class NewZealandLandcarePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetFo
             'end_date': [toolkit.get_validator('ignore_empty'),
                          toolkit.get_validator('ckanext_lcrnz_is_date'),
                          toolkit.get_converter('convert_to_extras')],
-            'doi': default_validators,
+            'doi': [toolkit.get_validator('ignore_empty'),
+                    toolkit.get_converter('convert_to_extras')],
         })
         return schema
 
@@ -36,6 +35,30 @@ class NewZealandLandcarePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetFo
     def update_package_schema(self):
         schema = super(NewZealandLandcarePlugin, self).update_package_schema()
         return self._modify_package_schema(schema)
+
+    def show_package_schema(self):
+        schema = super(NewZealandLandcarePlugin, self).show_package_schema()
+
+        schema.update({
+            'publisher': [toolkit.get_converter('convert_from_extras'),
+                          toolkit.get_validator('ignore_empty')],
+            'publication_year': [toolkit.get_converter('convert_from_extras'),
+                                 toolkit.get_validator('ignore_empty'),
+                                 toolkit.get_validator('ckanext_lcrnz_is_year'),
+                                 ],
+            'start_date': [toolkit.get_converter('convert_from_extras'),
+                           toolkit.get_validator('ignore_empty'),
+                           toolkit.get_validator('ckanext_lcrnz_is_date'),
+                           ],
+            'end_date': [toolkit.get_converter('convert_from_extras'),
+                         toolkit.get_validator('ignore_empty'),
+                         toolkit.get_validator('ckanext_lcrnz_is_date'),
+                         ],
+            'doi': [toolkit.get_converter('convert_from_extras'),
+                    toolkit.get_validator('ignore_empty')],
+        })
+
+        return schema
 
     def is_fallback(self):
         return True

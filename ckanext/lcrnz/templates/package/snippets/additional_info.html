@@ -1,0 +1,35 @@
+{% ckan_extends %}
+
+{% block extras %}
+  {{ super() }}
+  {% if pkg_dict.publisher %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Publisher") }}</th>
+      <td class="dataset-details">{{ pkg_dict.publisher }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.publication_year %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Publication Year") }}</th>
+      <td class="dataset-details">{{ pkg_dict.publication_year }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.start_date %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("Start Date") }}</th>
+      <td class="dataset-details">{{ pkg_dict.start_date }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.end_date %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("End Date") }}</th>
+      <td class="dataset-details">{{ pkg_dict.end_date }}</td>
+    </tr>
+  {% endif %}
+  {% if pkg_dict.doi %}
+    <tr>
+      <th scope="row" class="dataset-label">{{ _("DOI") }}</th>
+      <td class="dataset-details">{{ pkg_dict.doi }}</td>
+    </tr>
+  {% endif %}
+{% endblock %}
