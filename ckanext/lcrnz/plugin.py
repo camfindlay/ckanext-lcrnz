@@ -26,6 +26,8 @@ class NewZealandLandcarePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetFo
             'doi': [toolkit.get_validator('ignore_empty'),
                     toolkit.get_converter('convert_to_extras')],
         })
+        schema['author'] = [toolkit.get_validator('repeating_text'),
+                            toolkit.get_validator('ignore_empty')]
         return schema
 
     def create_package_schema(self):
@@ -57,6 +59,8 @@ class NewZealandLandcarePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetFo
             'doi': [toolkit.get_converter('convert_from_extras'),
                     toolkit.get_validator('ignore_empty')],
         })
+        schema['author'] = [toolkit.get_validator('repeating_text_output'),
+                            toolkit.get_validator('ignore_empty')]
 
         return schema
 
@@ -86,6 +90,8 @@ class NewZealandLandcarePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetFo
 
         # add our extension's public directory, to include the custom css file
         toolkit.add_public_directory(config, 'public')
+
+        toolkit.add_resource('fanstatic', 'lcrnz')
 
     def get_validators(self):
         return {
