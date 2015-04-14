@@ -1,0 +1,33 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ _('Login via LDAP') }}{% endblock %}
+
+{% set controller = 'ckanext.lcrnz.controllers.user:UserController' %}
+{% block breadcrumb_content %}
+  <li class="active">{{ h.nav_link(_('Login via LDAP'), controller=controller, action='ldap_login') }}</li>
+{% endblock %}
+
+{% block primary_content %}
+  <section class="module">
+    <div class="module-content">
+      <h1 class="page-heading">{% block page_heading %}{{ _('Login via LDAP') }}{% endblock %}</h1>
+      {% block form %}
+        {% snippet "user/snippets/login_form.html", action='/ldap_login_handler', error_summary=error_summary %}
+      {% endblock %}
+    </div>
+  </section>
+{% endblock %}
+
+{% block secondary_content %}
+  <section class="module module-narrow module-shallow">
+      <h2 class="module-heading">{{ _('Landcare Research users') }}</h2>
+      <div class="module-content">
+        <p>
+        This form allows Landcare Research users to login
+        using their existing credentials. If you are not
+        a Landcare Research user please login on the
+        <a href="/user/login">main login page</a>.
+        </p>
+      </div>
+  </section>
+{% endblock %}

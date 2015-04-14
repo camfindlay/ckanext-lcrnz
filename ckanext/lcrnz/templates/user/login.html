@@ -1,0 +1,23 @@
+{% ckan_extends %}
+
+{% block primary_content %}
+
+   <section class="module">
+    <div class="module-content">
+      <h1 class="page-heading">{{ _('Login') }}</h1>
+        {% snippet "user/snippets/login_form.html", action=c.login_handler, error_summary=error_summary %}
+    </div>
+  </section>
+
+
+   <section class="module">
+
+    <div class="module-content">
+
+      <h2 class="page-heading">{{ _('Login via LDAP') }}</h2>
+        Landcare Research users can <a href='/user/ldap_login'>login with their existing credentials</a>
+    </div>
+
+  </section>
+{% endblock %}
+

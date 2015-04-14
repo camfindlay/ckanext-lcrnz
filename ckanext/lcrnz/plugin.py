@@ -72,6 +72,11 @@ class NewZealandLandcarePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetFo
         terms = 'ckanext.lcrnz.controllers.terms:TermsController'
         map.connect('terms_of_use', '/terms_of_use',
                     controller=terms, action='terms_of_use')
+
+        user = 'ckanext.lcrnz.controllers.user:UserController'
+        map.connect('ldap_login', '/user/ldap_login',
+                    controller=user, action='ldap_login')
+
         return map
 
     def update_config(self, config):
