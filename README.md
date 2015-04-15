@@ -73,3 +73,10 @@ preloaded with a test directory that you can run:
         docker run --name ldap -p 389:389 -d openknowledge/openldap-lcrnz
 
 For more details check https://github.com/okfn/docker-openldap-lcrnz
+
+
+## Customise search field placeholder text
+
+Currently, the placeholder text for the Dataset, Group, and Organization
+search fields is blank. Placeholder text can be added by editing the
+appropriate `placeholder` variables in `templates/snippets/search_form.html`.
