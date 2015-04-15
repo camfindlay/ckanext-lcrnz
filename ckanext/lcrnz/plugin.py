@@ -1,3 +1,5 @@
+import json
+
 from ckan import plugins
 from ckan.plugins import toolkit
 
@@ -9,6 +11,8 @@ class NewZealandLandcarePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetFo
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IDatasetForm)
     plugins.implements(plugins.IValidators)
+    plugins.implements(plugins.IPackageController, inherit=True)
+    plugins.implements(plugins.IFacets)
 
     def _modify_package_schema(self, schema):
         schema.update({
@@ -98,3 +102,29 @@ class NewZealandLandcarePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetFo
             'ckanext_lcrnz_is_year': validators.is_year,
             'ckanext_lcrnz_is_date': validators.is_date
         }
+
+    def before_index(self, dataset_dict):
+        '''
+        Insert `vocab_author` into solr index with list of authors derived
+        from the dataset_dict's `author` field.
+        '''
+        def listify_author(author_value):
+            if isinstance(author_value, list):
+                return author_value
+            if author_value is None:
+                return []
+            try:
+                return json.loads(author_value)
+            except ValueError:
+                return [author_value]
+
+        author_value = listify_author(dataset_dict.get('author'))
+
+        if dataset_dict.get('author'):
+            dataset_dict['vocab_author'] = author_value
+
+        return dataset_dict
+
+    def dataset_facets(self, facets_dict, package_type):
+        facets_dict['vocab_author'] = plugins.toolkit._('Authors')
+        return facets_dict
