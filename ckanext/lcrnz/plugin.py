@@ -125,6 +125,23 @@ class NewZealandLandcarePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetFo
 
         return dataset_dict
 
+    # IFacets
+
     def dataset_facets(self, facets_dict, package_type):
-        facets_dict['vocab_author'] = plugins.toolkit._('Authors')
+        _update_facets(facets_dict)
         return facets_dict
+
+    def group_facets(self, facets_dict, group_type, package_type):
+        _update_facets(facets_dict)
+        return facets_dict
+
+    def organization_facets(self, facets_dict, organization_type, package_type):
+        _update_facets(facets_dict)
+        return facets_dict
+
+
+def _update_facets(facets_dict):
+
+    facets_dict.update({
+        'vocab_author': plugins.toolkit._('Authors')
+    })
