@@ -24,6 +24,9 @@ CKAN extension for the [Landcare Research Datastore](http://datastore.landcarere
 
 3. Install ckanext-ldap:
 
+        # Install required libraries
+        apt-get install libldap2-dev libsasl2-dev libssl-dev
+
         cd /usr/lib/ckan/default/src
         git clone https://github.com/okfn/ckanext-ldap.git
         cd ckanext-ldap
