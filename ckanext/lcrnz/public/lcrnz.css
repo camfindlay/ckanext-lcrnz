@@ -9,3 +9,24 @@
   margin-top: -15px;
   padding-top: 0;
 }
+
+/* lcrnz repeating */
+
+.control-repeating .checkbox.btn {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  left: 5px;
+  height: 1px;
+  width: 10px;
+  padding: 3px 8px;
+
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
+  line-height: 21px;
+}
+
+.control-repeating .checkbox.btn input {
+  display: none;
+  width: auto;
+}

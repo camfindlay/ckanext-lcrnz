@@ -1,14 +1,11 @@
 {% ckan_extends %}
 
 {% block package_metadata_author %}
-<div data-module="lcrnz-more-fields">
-  {# repeating authors #}
-  {%- set authors = data.get('author', []) -%}
-  {%- set total_empty_authors = 3 - authors|count -%}
-  {% if total_empty_authors <= 0 %}{%- set total_empty_authors = 1 -%}{% endif %}
+<div data-module="lcrnz-repeating">
+  {%- set authors = data.get('author', []) + [''] -%}
 
-  {%- for author in authors + [''] * total_empty_authors -%}
-    <div class="control-custom">
+  {%- for author in authors -%}
+    <div class="control-repeating">
     {{ form.input('author' + '-' ~ loop.index,
       id='field-' + 'author' + '-' ~ loop.index,
       label='Author' + ' ' ~ loop.index,

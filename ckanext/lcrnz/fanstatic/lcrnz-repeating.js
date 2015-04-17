@@ -3,11 +3,11 @@
  * gives a visual indicator when fields are removed by disabling them.
  *
  */
-this.ckan.module('lcrnz-more-fields', function (jQuery, _) {
+this.ckan.module('lcrnz-repeating', function (jQuery, _) {
   return {
     options: {
       /* The selector used for each custom field wrapper */
-      fieldSelector: '.control-custom'
+      fieldSelector: '.control-repeating'
     },
 
     /* Initializes the module and attaches custom event listeners. This
@@ -19,8 +19,11 @@ this.ckan.module('lcrnz-more-fields', function (jQuery, _) {
       if (!jQuery('html').hasClass('ie7')) {
         jQuery.proxyAll(this, /_on/);
 
-        var delegated = this.options.fieldSelector + ':last input:first';
-        this.el.on('change', delegated, this._onChange);
+        // Create 'plus field' checkbox and add to first input container.
+        var firstFieldContainer = this.el.find(this.options.fieldSelector + ':first .controls');
+        var checkbox = $('<label class="checkbox btn btn-success icon-plus" for="add-field"><input type="checkbox" id="add-field" /></label>');
+        checkbox.on('change', ':checkbox', this._onChange);
+        $(firstFieldContainer).append(checkbox);
       }
     },
 
@@ -33,12 +36,11 @@ this.ckan.module('lcrnz-more-fields', function (jQuery, _) {
      * Returns nothing.
      */
     newField: function (element) {
-      new_el = this.cloneField(element);
-      this.el.append(new_el);
-      new_el.find('input').focus();
+      newEl = this.cloneField(element);
+      this.el.append(newEl);
     },
 
-    /* Clones the provided element, wipes it's content and increments it's
+    /* Clones the provided element, wipes its content and increments its
      * for, id and name fields (if possible).
      *
      * current - A custom field to clone.
@@ -49,8 +51,8 @@ this.ckan.module('lcrnz-more-fields', function (jQuery, _) {
       return this.resetField(jQuery(current).clone());
     },
 
-    /* Wipes the contents of the field provided and increments it's name, id
-     * and for attributes.
+    /* Wipes the contents of the field provided and increments its name, id
+     * and for attributes. Also updates 'add' checkbox handler.
      *
      * field - A custom field to wipe.
      *
@@ -67,29 +69,15 @@ this.ckan.module('lcrnz-more-fields', function (jQuery, _) {
       var label = field.find('label');
       label.text(increment).attr('for', increment);
 
+      field.find('.checkbox').remove();
+
       return field;
     },
 
-    /* Disables the provided field and input elements. Can be re-enabled by
-     * passing false as the second argument.
-     *
-     * field   - The field to disable.
-     * disable - If false re-enables the element.
-     *
-     * Returns nothing.
-     */
-    disableField: function (field, disable) {
-      field.toggleClass('disabled', disable !== false);
-    },
-
-    /* Event handler that fires when the last key in the custom field block
-     * changes.
-     */
+    /* Event handler called when the add checkbox is changed */
     _onChange: function (event) {
-      if (event.target.value !== '') {
-        var parent = jQuery(event.target).parents(this.options.fieldSelector);
-        this.newField(parent);
-      }
+      var lastFieldContainer = this.el.find(this.options.fieldSelector + ':last');
+      this.newField(lastFieldContainer);
     }
   };
 });
