@@ -4156,7 +4156,7 @@ msgstr "No collections found for \"{query}\""
 #: ckan/templates/snippets/search_result_text.html:29
 msgid "{number} organization found"
 msgid_plural "{number} organizations found"
-msgstr[0] "{number} organization found"
+msgstr[0] "{number} collection found"
 msgstr[1] "{number} collections found"
 
 #: ckan/templates/snippets/search_result_text.html:30
