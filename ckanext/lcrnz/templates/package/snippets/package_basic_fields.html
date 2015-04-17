@@ -34,8 +34,7 @@
   {{ form.input('publisher',
     label=_('Publisher'),
     id='field-publisher',
-    placeholder=_('e.g. Landcare Research NZ Ltd'),
-    value=data.publisher,
+    value=data.publisher or _('Landcare Research NZ Ltd'),
     error=errors.publisher,
     classes=['control-medium']) }}
 
