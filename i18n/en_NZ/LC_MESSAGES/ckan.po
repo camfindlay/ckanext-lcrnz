@@ -4146,7 +4146,7 @@ msgstr ""
 #: ckan/templates/snippets/search_result_text.html:27
 msgid "{number} organization found for \"{query}\""
 msgid_plural "{number} organizations found for \"{query}\""
-msgstr[0] "{number} organization found for \"{query}\""
+msgstr[0] "{number} collection found for \"{query}\""
 msgstr[1] "{number} collections found for \"{query}\""
 
 #: ckan/templates/snippets/search_result_text.html:28
