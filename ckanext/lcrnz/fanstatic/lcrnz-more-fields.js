@@ -17,8 +17,6 @@ this.ckan.module('lcrnz-more-fields', function (jQuery, _) {
      */
     initialize: function () {
       if (!jQuery('html').hasClass('ie7')) {
-
-        console.log('asdf');
         jQuery.proxyAll(this, /_on/);
 
         var delegated = this.options.fieldSelector + ':last input:first';
