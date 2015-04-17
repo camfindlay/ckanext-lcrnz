@@ -61,6 +61,12 @@ CKAN extension for the [Landcare Research Datastore](http://datastore.landcarere
         ckanext.ldap.organization.id = cfa490ed-d9e4-46a6-8c43-a7057cfebd1c
         ckanext.ldap.organization.role = member
 
+
+        # Custom i18n folder (for replacing "organizations" with "collections")
+        # Update the path if necessary
+        ckan.locale_default = en_NZ
+        ckan.i18n_directory = /usr/lib/ckan/default/src/ckanext-lcrnz
+
     The rest of standard settings (`site_id`, `solr_url`, ...) are not covered
     here but should of course be set up as well.
 
@@ -76,6 +82,28 @@ preloaded with a test directory that you can run:
         docker run --name ldap -p 389:389 -d openknowledge/openldap-lcrnz
 
 For more details check https://github.com/okfn/docker-openldap-lcrnz
+
+## Custom translation files
+
+The extension ships with customized translation files that replace occurrences
+of "organization" with "collection". These are located in the `i18n` folder and
+require the `ckan.i18n_directory` and `ckan.locale_default` settings to be set up
+(see above).
+
+If it is necessary to modify the translation strings, follow these steps:
+
+1. Install Babel if necessary (make sure to have your virtualenv activated):
+
+    pip install babel
+
+2. Modify the `ckanext-lcrnz/i18n/en_NZ/LC_MESSAGES/ckan.po` file. You must only change
+   the `msgstr` sections.
+
+3. Compile a new `ckan.mo` file with the following command (make sure to have your virtualenv activated):
+
+        python setup.py compile_catalog -D ckan -d i18n
+
+4. Restart the web server
 
 
 ## Customise search field placeholder text
