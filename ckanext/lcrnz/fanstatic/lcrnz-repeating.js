@@ -1,6 +1,5 @@
 /* Module for working with multiple field inputs. This will create
- * a new field when the user changes text into the last field. It also
- * gives a visual indicator when fields are removed by disabling them.
+ * a new field when the user clicks the 'add field' button.
  *
  */
 this.ckan.module('lcrnz-repeating', function (jQuery, _) {
@@ -27,9 +26,9 @@ this.ckan.module('lcrnz-repeating', function (jQuery, _) {
       }
     },
 
-    /* Creates a new field and appends it to the list, then focus on the new field.
-     * This currently works by cloning and erasing an existing input rather than
-     * using a template. In future using a template might be more appropriate.
+    /* Create a new field and appends it to the list. This currently works by
+     * cloning and erasing an existing input rather than using a template.
+     * In future using a template might be more appropriate.
      *
      * element - Another custom field element to wrap.
      *
@@ -40,8 +39,8 @@ this.ckan.module('lcrnz-repeating', function (jQuery, _) {
       this.el.append(newEl);
     },
 
-    /* Clones the provided element, wipes its content and increments its
-     * for, id and name fields (if possible).
+    /* Clone the provided element, wipe its content and increment its
+     * `for`, `id` and `name` fields (if possible).
      *
      * current - A custom field to clone.
      *
@@ -51,8 +50,8 @@ this.ckan.module('lcrnz-repeating', function (jQuery, _) {
       return this.resetField(jQuery(current).clone());
     },
 
-    /* Wipes the contents of the field provided and increments its name, id
-     * and for attributes. Also updates 'add' checkbox handler.
+    /* Wipe the contents of the field provided and increment its `name`, `id`
+     * and `for` attributes. Also remove 'add' checkbox if necessary.
      *
      * field - A custom field to wipe.
      *
