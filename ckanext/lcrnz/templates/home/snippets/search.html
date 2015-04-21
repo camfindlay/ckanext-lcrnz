@@ -1,5 +1,10 @@
 {% set tags = h.get_facet_items_dict('tags', limit=3) %}
-{% set placeholder = _('') %}
+
+{#
+Set placeholder text for the home page search form here by uncommenting the
+line below and setting a value for `placeholder`.
+#}
+{#{% set placeholder = _('') %}#}
 
 <div class="module module-search module-narrow module-shallow box">
   <form class="module-content search-form" method="get" action="{% url_for controller='package', action='search' %}">

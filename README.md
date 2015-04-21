@@ -111,3 +111,6 @@ If it is necessary to modify the translation strings, follow these steps:
 Currently, the placeholder text for the Dataset, Group, and Organization
 search fields is blank. Placeholder text can be added by editing the
 appropriate `placeholder` variables in `templates/snippets/search_form.html`.
+
+To change teh placeholder text for the home page search form, edit the
+`placeholder` variable in `templates/home/snippets/search.html`.
