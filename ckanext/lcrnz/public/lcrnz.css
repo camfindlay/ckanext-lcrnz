@@ -9,6 +9,16 @@
   margin-top: -15px;
   padding-top: 0;
 }
+@media (max-width: 767px) {
+  .form-horizontal .help-block {
+    margin-left: 180px;
+  }
+}
+@media (max-width: 480px) {
+  .form-horizontal .help-block {
+    margin-left: 0;
+  }
+}
 
 /* lcrnz repeating */
 
@@ -29,4 +39,10 @@
 .control-repeating .checkbox.btn input {
   display: none;
   width: auto;
+}
+
+@media (max-width: 767px) {
+  .form-horizontal .control-repeating:first-child .controls input {
+    width: 87%;
+  }
 }
