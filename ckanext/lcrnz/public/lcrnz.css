@@ -46,3 +46,8 @@
     width: 87%;
   }
 }
+
+/* Login form */
+.lcnz-login .form-actions {
+  border: 0 none;
+}

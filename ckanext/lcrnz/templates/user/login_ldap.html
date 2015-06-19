@@ -4,13 +4,13 @@
 
 {% set controller = 'ckanext.lcrnz.controllers.user:UserController' %}
 {% block breadcrumb_content %}
-  <li class="active">{{ h.nav_link(_('Login via LDAP'), controller=controller, action='ldap_login') }}</li>
+  <li class="active">{{ h.nav_link(_('Staff Login'), controller=controller, action='ldap_login') }}</li>
 {% endblock %}
 
 {% block primary_content %}
   <section class="module">
     <div class="module-content">
-      <h1 class="page-heading">{% block page_heading %}{{ _('Login via LDAP') }}{% endblock %}</h1>
+      <h1 class="page-heading">{% block page_heading %}{{ _('Login for Landcare Research Staff') }}{% endblock %}</h1>
       {% block form %}
         {% snippet "user/snippets/login_form.html", action='/ldap_login_handler', error_summary=error_summary %}
       {% endblock %}
