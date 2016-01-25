@@ -4,15 +4,15 @@
 
   <section class="module lcnz-ldap-login">
     <div class="module-content">
-      <h1 class="page-heading">{{ _('Landcare Staff Login') }}</h1>
-        Landcare Research staff {% link_for 'click here', controller='ckanext.lcrnz.controllers.user:UserController', action='ldap_login' %} to login with your existing network username and password
+      <h1 class="page-heading">{{ _('Landcare Staff Registration') }}</h1>
+        Landcare staff, if this is your <b>first login</b>, {% link_for 'click here', controller='ckanext.lcrnz.controllers.user:UserController', action='ldap_login' %} to register with your existing network username and password, otherwise login below.
       <div class="form-actions"></div>
     </div>
   </section>
 
   <section class="module lcnz-login">
     <div class="module-content">
-      <h1 class="page-heading">{{ _('Login (Non Landcare Research Users)') }}</h1>
+      <h1 class="page-heading">{{ _('Login (Registered Users)') }}</h1>
         {% snippet "user/snippets/login_form.html", action=c.login_handler, error_summary=error_summary %}
     </div>
   </section>
