@@ -2,9 +2,9 @@ import json
 
 from ckan import plugins
 from ckan.plugins import toolkit
+from routes.mapper import SubMapper, Mapper as _Mapper
 
 import ckanext.lcrnz.logic.validators as validators
-
 
 class NewZealandLandcarePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetForm):
     plugins.implements(plugins.IRoutes, inherit=True)
@@ -84,6 +84,16 @@ class NewZealandLandcarePlugin(plugins.SingletonPlugin, toolkit.DefaultDatasetFo
         user = 'ckanext.lcrnz.controllers.user:UserController'
         map.connect('ldap_login', '/user/ldap_login',
                     controller=user, action='ldap_login')
+
+        # replace feeds
+        feeds = 'ckanext.lcrnz.controllers.feed:LCRNZFeedController'
+        map.redirect('/user/', '/user')
+        with SubMapper(map, controller=feeds) as m:
+             m.connect('/feeds/group/{id}.atom', action='group')
+             m.connect('/feeds/organization/{id}.atom', action='organization')
+             m.connect('/feeds/tag/{id}.atom', action='tag')
+             m.connect('/feeds/dataset.atom', action='general')
+             m.connect('/feeds/custom.atom', action='custom')
 
         return map
 
