@@ -55,7 +55,7 @@ class LCRNZFeedController(FeedController):
                 description=pkg.get('notes', ''),
                 updated=h.date_str_to_datetime(pkg.get('metadata_modified')),
                 published=h.date_str_to_datetime(pkg.get('metadata_created')),
-                unique_id=_create_atom_id(u'/dataset/%s' % pkg['id']),
+                unique_id=_create_atom_id(u'dataset/%s' % pkg['id']),
                 author_name=';'.join(str(x) for x in pkg.get('author','')),
                 author_email=pkg.get('author_email', ''),
                 categories=[t['name'] for t in pkg.get('tags', [])],
